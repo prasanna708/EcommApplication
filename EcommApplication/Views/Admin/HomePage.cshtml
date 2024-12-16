@@ -1,0 +1,33 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>HomePage</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <style>
+        body {
+            background-image: url('../../images/homepage.jpg');
+            background-size : cover;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1 class="text-center text-bg-dark text-danger text-decoration-underline m-2">Welcome To Online Shopping</h1>
+        <div>
+            <center>
+                <h3>
+                    @Html.ActionLink("Login", "Login", "Admin" , new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Signup/Register" , "Registration", "Users", null , new { @class = "btn btn-secondary" })
+                </h3>
+            </center>
+        </div>
+    </div>
+</body>
+</html>

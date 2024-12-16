@@ -1,0 +1,42 @@
+﻿@model EcommApplication.Models.Order
+
+@{
+    ViewBag.Title = "AddTocart";
+    Layout = "~/Views/Shared/_UsersLayoutPage.cshtml";
+}
+
+@{ 
+    var products = ViewBag.Product;
+    var orders = ViewBag.Order;
+}
+
+<h2>AddTocart</h2>
+
+@using (Html.BeginForm("AddToCart", "Users", FormMethod.Post))
+{
+    @Html.HiddenFor(o => o.ProductId)
+    <table align="center" cellpadding="8">
+        <tr>
+            <td>
+                <label>Enter quantity of Products you want to Purchase:</label>
+            </td>
+            <td>
+                @Html.TextBoxFor(o => o.Quantity , new { @class = "form-control" })
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" value="Add to Cart" class="btn btn-warning"  />
+                @Html.ActionLink("Cancel" , "DisplayAllProducts" , null , new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                @if (TempData["success"] != null)
+                {
+                    @TempData["success"]
+                }
+            </td>
+        </tr>
+    </table>
+}

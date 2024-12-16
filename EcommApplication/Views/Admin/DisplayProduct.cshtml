@@ -1,0 +1,46 @@
+﻿@model EcommApplication.Models.Product
+
+@{
+    ViewBag.Title = "DisplayProduct";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+<h2 align="center" class="text-bg-info">Product Details(@Session["productName"])</h2>
+
+<div>
+    <table align="center" cellpadding="8">
+        <tr>
+            <td>
+                <img src="~/Uploads/@Model.Photo" width="200" height="200" alt="No Image" />
+            </td>
+            <td>
+                <table align="center" cellpadding="5">
+                    <tr>
+                        <td>Product Id:</td>
+                        <td>@Model.ProductId</td>
+                    </tr>
+                    <tr>
+                        <td>Name:</td>
+                        <td>@Model.Name</td>
+                    </tr>
+                    <tr>
+                        <td>Price:</td>
+                        <td>&#8377;@Model.Price</td>
+                    </tr>
+                    <tr>
+                        <td>Available quamtity:</td>
+                        <td>@Model.Quantity</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <div>
+        <button class="btn btn-secondary">
+            <i class="bi bi-skip-backward-fill"></i>
+            @Html.ActionLink("Back to main Page", "DisplayProducts", null, new { @class = "btn btn-secondary" })
+        </button>
+    </div>
+</div>
+

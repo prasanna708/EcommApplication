@@ -1,0 +1,67 @@
+﻿@model IEnumerable<EcommApplication.Models.PurchaseAuditLogs>
+
+@{
+    ViewBag.Title = "ViewOrders";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+<h2 class="text-center text-bg-info">View All Orders</h2>
+
+@if (Model != null && Model.Any())
+{
+    <div>
+        <table class="table">
+            <tr>
+                <th>Order Number</th>
+                <th>Order Id</th>
+                <th>Product Id</th>
+                <th>User Id</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+                <th>Order Date and Time</th>
+                <th>Photo</th>
+            </tr>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(p => product.OrderNumber)</td>
+                    <td>@Html.DisplayFor(p => product.OrderId)</td>
+                    <td>@Html.DisplayFor(p => product.ProductId)</td>
+                    <td>@Html.DisplayFor(p => product.UserId)</td>
+                    <td>@Html.DisplayFor(p => product.ProductName)</td>
+                    <td>@Html.DisplayFor(p => product.Quantity)</td>
+                    <td>&#8377;@Html.DisplayFor(p => product.TotalPrice)</td>
+                    <td>@Html.DisplayFor(p => product.OrderDateAndTime)</td>
+                    <td>
+                        <img src='/Uploads/@product.Photo' height="40" width="80" alt='@product.ProductName' />
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="8" align="right">
+                    <h3 class="text-success">
+                        Total Sales : &#8377;@ViewBag.Total
+                    </h3>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="8" align="center">
+                    <button class="btn btn-secondary">
+                        <i class="bi bi-skip-backward-fill"></i>
+                        @Html.ActionLink("Back to main Page", "DisplayProducts", null, new { @class = "btn btn-secondary" })
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+}
+else
+{
+    <br />
+    <center>
+        <p class="text-danger">No Orders Placed Yet!</p>
+        <br />
+        @Html.ActionLink("View Cart","ViewCart",null,new { @class = "btn btn-secondary" })
+    </center>
+}

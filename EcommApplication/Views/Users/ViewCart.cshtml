@@ -1,0 +1,75 @@
+﻿@model IEnumerable<EcommApplication.Models.Order>
+
+@{
+    ViewBag.Title = "ViewCart";
+    Layout = "~/Views/Shared/_UsersLayoutPage.cshtml";
+}
+
+<h2 align="center" class="text-bg-success">View Cart</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <tr class="table-primary">
+            <th>@Html.DisplayNameFor(o => o.OrderId)</th>
+            <th>@Html.DisplayNameFor(o => o.ProductId)</th>
+            <th>@Html.DisplayNameFor(o => o.UserId)</th>
+            <th>@Html.DisplayNameFor(o => o.Name)</th>
+            <th>@Html.DisplayNameFor(o => o.Quantity)</th>
+            <th>@Html.DisplayNameFor(o => o.OrderDateAndTime)</th>
+            <th>@Html.DisplayNameFor(o => o.TotalPrice)</th>
+            <th>@Html.DisplayNameFor(o => o.Photo)</th>
+            <th></th>
+        </tr>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(o => order.OrderId)</td>
+                <td>@Html.DisplayFor(o => order.ProductId)</td>
+                <td>@Html.DisplayFor(o => order.UserId)</td>
+                <td>@Html.DisplayFor(o => order.Name)</td>
+                <td>@Html.DisplayFor(o => order.Quantity)</td>
+                <td>@Html.DisplayFor(o => order.OrderDateAndTime)</td>
+                <td>@Html.DisplayFor(o => order.TotalPrice)</td>
+                <td>
+                    <img src='/Uploads/@order.Photo' height="40" width="80" alt="No Image" />
+                </td>
+                <td>
+                    @Html.ActionLink("Cancel Order", "DeleteOrders", "Users", new { id = order.OrderId }, new { @class = "btn btn-danger", onclick = "return confirm('Are you sure to delete this record?');" })
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="9" align="right">
+                @Html.ActionLink("Place Order", "PlaceOrder", "Users", new { id = Session["uid"] }, new { @class = "btn btn-warning", onclick = "return confirm('Are you sure to Place order of all products that are in cart?');" })
+            </td>
+        </tr>
+        <tr>
+            <td colspan="9" align="left">
+                <button class="btn btn-secondary">
+                    <i class="bi bi-skip-backward-fill"></i>
+                    @Html.ActionLink("Back to main Page", "DisplayAllProducts", null, new { @class = "btn btn-secondary" })
+                </button>
+            </td>
+        </tr>
+    </table>
+}
+else
+{
+    <br />
+<center>
+    <img src="https://rukminim2.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90" width="222" height="162" alt="no image" />
+</center>
+<br />
+<div class="text-center">
+    Your cart is empty!
+</div>
+<br />
+<div class="text-center">
+    <p class="fw-light fs-6">Add items to it now.</p>
+</div>
+<div class="text-center">
+    @Html.ActionLink("Shop Now" , "DisplayAllProducts" , null , new { @class = "btn btn-primary btn-lg" })
+</div>
+<br /><br /><br /><br /><br /><br />
+}

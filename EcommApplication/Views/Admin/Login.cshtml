@@ -1,0 +1,73 @@
+﻿@model EcommApplication.Models.User
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AdminLogin</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <style>
+        body {
+            background-image: url('../../images/adminlogin.jpg');
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2 class="text-bg-primary" align="center">Login Form</h2>
+        <div class="align-content-end">
+            @Html.Partial("_Notification")
+        </div>
+        @using (Html.BeginForm("Login", "Admin"))
+        {
+            
+            <table cellpadding="8" align="center">
+                <tr>
+                    <td>@Html.DisplayNameFor(u => u.UserId)</td>
+                    <td>
+                        @Html.TextBoxFor(a => a.UserId, new { @class = "form-control", placeholder = "Enter User Id" })
+                        <font color="red">@Html.ValidationMessageFor(u => u.UserId)</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(u => u.Pwd)</td>
+                    <td>
+                        @Html.PasswordFor(u => u.Pwd, new { @class = "form-control", placeholder = "Enter Password" })
+                        <font color="red">@Html.ValidationMessageFor(u => u.Pwd)</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" colspan="2">
+                        <input type="submit" value="Login" class="btn btn-primary" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        
+                        @if (TempData["error"] != null)
+                        {
+                            <font color="red">
+                                @TempData["error"]
+                            </font>
+                        }
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+    <div class="container">
+        <button class="btn btn-secondary">
+            <i class="bi bi-skip-backward-fill"></i>
+            @Html.ActionLink("Back to Home Page", "HomePage", "Admin", new { @class = "btn btn-secondary" })
+        </button>
+    </div>
+</body>
+</html>

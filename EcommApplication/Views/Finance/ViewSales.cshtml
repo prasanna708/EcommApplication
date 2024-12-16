@@ -1,0 +1,60 @@
+﻿@model EcommApplication.Models.SalesViewModel
+
+@{
+    ViewBag.Title = "ViewSales";
+    Layout = "~/Views/Shared/_FinanceLayout.cshtml";
+}
+
+<h2 class="text-center text-bg-warning">View Sales</h2>
+
+<div>
+    @using (Html.BeginForm("ViewSales" , "Finance" , FormMethod.Get))
+    {
+        <table align="center" cellpadding="8">
+            <tr>
+                <td>Select Start Date:</td>
+                <td>@Html.TextBoxFor(s => s.StartDate, new { type = "date" , @class = "form-control" })</td>
+            </tr>
+            <tr>
+                <td>Select End Date:</td>
+                <td>@Html.TextBoxFor(s => s.EndDate, new { type = "date" , @class = "form-control" })</td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Filter" class="btn btn-secondary btn-group-lg" />
+                </td>
+            </tr>
+        </table>
+        if (Model.FilteredSales != null && Model.FilteredSales.Any())
+        {
+            <table class="table table-secondary table-bordered table-hover">
+                <tr class="table-dark">
+                    <th>Order Id</th>
+                    <th>Product Id</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Total Price</th>
+                    <th>Order Date</th>
+                </tr>
+                @foreach (var sale in Model.FilteredSales)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(s => sale.OrderId)</td>
+                        <td>@Html.DisplayFor(s => sale.ProductId)</td>
+                        <td>@Html.DisplayFor(s => sale.ProductName)</td>
+                        <td>@Html.DisplayFor(s => sale.Quantity)</td>
+                        <td>@Html.DisplayFor(s => sale.TotalPrice)</td>
+                        <td>@Html.DisplayFor(s => sale.OrderDateAndTime)</td>
+                    </tr>
+                 }
+            </table>
+        }
+        else
+        {
+            <p class="text-center text-danger fw-bold">
+                No Sales found between the selected dates.
+            </p>
+        }
+     }
+</div>
+

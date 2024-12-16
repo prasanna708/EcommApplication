@@ -1,0 +1,92 @@
+﻿@model EcommApplication.Models.User
+
+@{
+    ViewBag.Title = "EditFinanceProfile";
+    Layout = "~/Views/Shared/_FinanceLayout.cshtml";
+}
+
+<h2 class="text-center text-bg-info">Edit Profile</h2>
+<div>
+    @using (Html.BeginForm("EditFinanceProfile", "Finance"))
+    {
+        <table align="center" cellpadding="8">
+            <tr>
+                <td>@Html.DisplayNameFor(u => u.UserId)</td>
+                <td>
+                    @Html.TextBoxFor(u => u.UserId, new { @class = "form-control" })
+                    <font color="red">@Html.ValidationMessageFor(u => u.UserId)</font>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(u => u.Name)</td>
+                <td>
+                    @Html.TextBoxFor(u => u.Name, new { @class = "form-control" })
+                    <font color="red">@Html.ValidationMessageFor(u => u.Name)</font>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(u => u.Pwd)</td>
+                <td>
+                    @Html.PasswordFor(u => u.Pwd, new { @class = "form-control" })
+                    <font color="red">@Html.ValidationMessageFor(u => u.Pwd)</font>
+                </td>
+            </tr>
+            @*<tr>
+                    <td>@Html.DisplayNameFor(u => u.Role)</td>
+                    <td>
+                        @Html.RadioButtonFor(u => u.Role, "Admin")Admin
+                        @Html.RadioButtonFor(u => u.Role, "User")User
+                        @Html.RadioButtonFor(u => u.Role, "Finance") Finance
+                        <font color="red">@Html.ValidationMessageFor(u => u.Role)</font>
+                    </td>
+                </tr>*@
+            <tr>
+                <td>@Html.DisplayNameFor(u => u.MobileNumber)</td>
+                <td>
+                    @Html.TextBoxFor(u => u.MobileNumber, new { @class = "form-control" })
+                    <font color="red">@Html.ValidationMessageFor(u => u.MobileNumber)</font>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(u => u.Email)</td>
+                <td>
+                    @Html.EditorFor(u => u.Email, new { @class = "form-control" })
+                    <font color="red">@Html.ValidationMessageFor(u => u.Email)</font>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(u => u.Dob)</td>
+                <td>
+                    <input type="date" name="dob" class="form-control" />
+                    <font color="red">@Html.ValidationMessageFor(u => u.Dob)</font>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(u => u.Location)</td>
+                <td>
+                    @{
+                        List<string> li = new List<string>() { "Andhra Pradesh", "Hyderabad", "Banglore", "Chennai", "Mumbai", "New Delhi", "Pune", "Goa" };
+                        SelectList list = new SelectList(li);
+                    }
+                    @Html.DropDownListFor(u => u.Location, list, "----Select State----", new { @class = "form-control" })
+                    <font color="red">@Html.ValidationMessageFor(u => u.Location)</font>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" colspan="2">
+                    <input type="submit" value="Update" class="btn btn-outline-primary" />
+                    <input type="reset" value="Clear" class="btn btn-outline-secondary" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="btn btn-secondary">
+                        <i class="bi bi-skip-backward-fill"></i>
+                        @Html.ActionLink("Back to Home Page", "HomePage", "Admin", null, new { @class = "btn btn-secondary" })
+                    </button>
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+

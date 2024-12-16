@@ -1,0 +1,51 @@
+﻿@model EcommApplication.Models.Product
+
+@{
+    ViewBag.Title = "EditProduct";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+
+<h2 align="center" class="text-bg-warning">Edit Product Details</h2>
+
+<div>
+    @using (Html.BeginForm("UpdateProduct", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(p => p.ProductId)
+        <table align="center" cellpadding="8">
+            <tr>
+                <td>@Html.DisplayNameFor(p => p.Name)</td>
+                <td>
+                    @Html.TextBoxFor(p => p.Name, new { @class = "form-control" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(p => p.Price)</td>
+                <td>
+                    @Html.TextBoxFor(p => p.Price, new { @class = "form-control" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(p => p.Quantity)
+                </td>
+                <td>
+                    @Html.TextBoxFor(p => p.Quantity, new { @class = "form-control" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(p => p.Photo)</td>
+                <td>
+                    <input type="file" name="selectedFile" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <td align="center" colspan="2">
+                    <input type="submit" value="Update" class="btn btn-outline-primary" />
+                    @Html.ActionLink("Back to main Page", "DisplayProducts", null, new { @class = "btn btn-outline-secondary" })
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+

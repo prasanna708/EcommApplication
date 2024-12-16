@@ -1,0 +1,34 @@
+﻿@model IEnumerable<EcommApplication.Models.User>
+
+@{
+    ViewBag.Title = "ViewUsers";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+<h2 class="text-bg-dark" align="center">View All Users</h2>
+
+<div>
+    <table class="table table-bordered">
+        <tr class="table-dark">
+            <th>@Html.DisplayNameFor(u => u.UserId)</th>
+            <th>@Html.DisplayNameFor(u => u.Name)</th>
+            <th>@Html.DisplayNameFor(u => u.Pwd)</th>
+            <th>@Html.DisplayNameFor(u => u.MobileNumber)</th>
+            <th>@Html.DisplayNameFor(u => u.Email)</th>
+            <th>@Html.DisplayNameFor(u => u.Dob)</th>
+            <th>@Html.DisplayNameFor(u => u.Location)</th>
+        </tr>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(u => user.UserId)</td>
+                <td>@Html.DisplayFor(u => user.Name)</td>
+                <td>@Html.DisplayFor(u => user.Pwd)</td>
+                <td>@Html.DisplayFor(u => user.MobileNumber)</td>
+                <td>@Html.DisplayFor(u => user.Email)</td>
+                <td>@Html.DisplayFor(u => user.Dob)</td>
+                <td>@Html.DisplayFor(u => user.Location)</td>
+            </tr>
+        }
+    </table>
+</div>

@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <style>
+        body {
+            background-image: url('../../images/admin.jpg');
+            background-size: cover;
+        }
+        .custom-dropdown {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: 2px solid #007BFF;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+            color: #333;
+            transition: all 0.3s ease;
+            width: 200px;
+        }
+            .custom-dropdown:focus {
+                border-color: #0056b3;
+                background-color: #e0e0e0;
+                outline: none;
+            }
+            .custom-dropdown option {
+                padding: 10px;
+                font-size: 14px;
+            }
+            .custom-dropdown:hover {
+                border-color: #0056b3;
+                background-color: #f9f9f9;
+            }
+
+    </style>
+</head>
+<body class="fs-5 fw-semibold mb-3">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        @{
+            var menuItems = new List<SelectListItem>
+        {
+            new SelectListItem { Text = "Admin", Value = "/Admin/AdminHomePage" },
+            new SelectListItem { Text = "User", Value = "/Users/UserHomePage" },
+            new SelectListItem { Text = "Finance", Value = "/Finance/FinanceHomePage" }
+        };
+        }
+        @Html.DropDownList("Menu", (IEnumerable<SelectListItem>)menuItems, "Admin", new { @class = "custom-dropdown", onchange = "window.location.href=this.value;" })
+
+        <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+            <ul class="navbar-nav flex-grow-1">
+                <li class="mb-3 ms-3">@Html.ActionLink("View All Products", "DisplayProducts", "Admin", new { @class = "nav-link link-underline" })</li>
+                <li class="mb-3 ms-3">@Html.ActionLink("View All Registered Users", "ViewUsers", "Admin", new { @class = "nav-link link-underline" })</li>
+                <li class="mb-3 ms-3">@Html.ActionLink("View All Orders", "ViewOrders", "Admin", new { @class = "nav-link link-underline" })</li>
+                <li class="mb-3 ms-3">@Html.ActionLink("Today's Total Sales", "TotalSales", "Admin", new { @class = "nav-link link-underline" })</li>
+                <li class="mb-3 ms-3">@Html.ActionLink("Stock Left", "StockLeft", "Admin", new { @class = "nav-link link-underline" })</li>
+                <li class="mb-3 ms-3">@Html.ActionLink("Edit Profile", "EditProfile", "Admin", new { id = Session["uid"] }, new { @class = "nav-link link-underline" })</li>
+                <li class="mb-3">@Html.ActionLink("Logout", "Login", "Admin", new { @class = "nav-link link-underline" })</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        @Html.Partial("_Notification")
+        <hr />
+        <footer>
+            <p align="center">&copy; @DateTime.Now.Year All Rigths Reserved.</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

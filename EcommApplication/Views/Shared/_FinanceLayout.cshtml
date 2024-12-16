@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <style>
+        body {
+            background-image: url('../../images/finance.jpg');
+            background-size: cover;
+        }
+    </style>
+</head>
+<body class="fs-5 fw-semibold mb-3">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <div class="container">
+            @{
+                var menuItems = new List<SelectListItem>
+{
+    new SelectListItem { Text = "User", Value = "/Users/UserHomePage" },
+    new SelectListItem { Text = "Finance", Value = "/Finance/FinanceHomePage" }
+};
+            }
+            @Html.DropDownList("Menu", (IEnumerable<SelectListItem>)menuItems, "Finance", new { @class = "custom-dropdown", onchange = "window.location.href=this.value;" })
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="mb-3 ms-3">@Html.ActionLink("View Sales", "ViewSales", "Finance", new { @class = "nav-link link-underline" })</li>
+                    <li class="mb-3 ms-3">@Html.ActionLink("Edit Profile", "EditFinanceProfile", "Finance", new { id = Session["uid"] }, new { @class = "nav-link link-underline" })</li>
+                    <li>@Html.ActionLink("Logout", "Login", "Admin", null, new { @class = "nav-link" })</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        @Html.Partial("_Notification")
+        <hr />
+        <footer>
+            <p align="center">&copy; @DateTime.Now.Year All Rigths Reserved.</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

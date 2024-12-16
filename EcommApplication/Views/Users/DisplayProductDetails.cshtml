@@ -1,0 +1,40 @@
+﻿@model EcommApplication.Models.Product
+
+@{
+    ViewBag.Title = "DisplayProductDetails";
+    Layout = "~/Views/Shared/_UsersLayoutPage.cshtml";
+}
+
+<h2 class="text-bg-info" align="center">Product Details</h2>
+
+<div>
+    <table cellpadding="8" align="center">
+        <tr>
+            <td>
+                <img src="/Uploads/@Model.Photo" width="200" height="200" alt="No Image" />
+            </td>
+            <td>
+                <table cellpadding="3" align="center">
+                    <tr>
+                        <td>@Html.DisplayNameFor(p => p.ProductId):</td>
+                        <td>@Model.ProductId</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(p => p.Name):</td>
+                        <td>@Model.Name</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(p => p.Price):</td>
+                        <td>@Model.Price</td>
+                    </tr>
+                    <tr>
+                        <td>Available Quantity:</td>
+                        <td>@Model.Quantity</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+    </table>
+</div>
+
